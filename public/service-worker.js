@@ -1,4 +1,4 @@
-const FILES_TO_CACHE = ["/", "/index.html", "app.js", "favicon.ico"];
+const FILES_TO_CACHE = ["/", "/index.html", "index.js"];
 
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
@@ -35,6 +35,7 @@ self.addEventListener("activate", function(evt) {
 
 // fetch
 self.addEventListener("fetch", function(evt) {
+  // cache successful requests to the API
   if (evt.request.url.includes("/api/")) {
     evt.respondWith(
       caches.open(DATA_CACHE_NAME).then(cache => {
