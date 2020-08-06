@@ -1,3 +1,29 @@
+// if ("serviceWorker" in navigator) {
+//   window.addEventListener("load", () => {
+//     navigator.serviceWorker.register("service-worker.js").then(reg => {
+//       console.log("We found your service worker file!", reg);
+//     });
+//   });
+// }
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then((reg) => {
+        console.log('Service worker registered.', reg);
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+          // Prevent the mini-infobar from appearing on mobile
+          e.preventDefault();
+          // Stash the event so it can be triggered later.
+          deferredPrompt = e;
+          // Update UI notify the user they can install the PWA
+          //showInstallPromotion();
+        });
+      });
+  });
+}
+
 let transactions = [];
 let myChart;
 
